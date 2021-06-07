@@ -16,8 +16,6 @@ const CAPTURE_OPTIONS = {
 function App() {
   const [users, setUsers] = useState({});
   const refs = {};
-  const videoRefs = useRef({});
-
 
   const connectToNewUser = (userId, stream, peer) => {
     const call = peer.call(userId, stream);
