@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import socket from 'socket.io-client';
 import Peer from 'peerjs';
 
@@ -8,9 +8,6 @@ const CAPTURE_OPTIONS = {
   audio: true,
   video: true,
 };
-
-
-
 
 
 function App() {
@@ -28,16 +25,17 @@ function App() {
   }
 
   useEffect(() => {
-    const sock = socket.connect('http://localhost:3000/', {
-      secure: false, 
+    const sock = socket.connect('https://cloudnet-video-server.herokuapp.com/', {
+      secure: true, 
       withCredentials: true,
       reconnectionAttempts: 2
     });
 
     const peer = new Peer(undefined, {
-      host: '/',
-      port: '3001',
-      secure: false
+      host: 'cloudnet-video-server.herokuapp.com',
+      port: 443,
+      path: '/mypeer',
+      secure: true
     });
 
     peer.on('open', id => {
